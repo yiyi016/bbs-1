@@ -1,0 +1,39 @@
+vename emp01.ename%type
+
+ delete from emp01 where ename=vename;
+Connection Success!
+
+인스턴스 메소드에 인스턴스 메소드 객체 셍성 없이 자겅 긴ㅇ 
+둘다 메모리에 없어서 
+메소드 안에서 선언된 변수는 초기화가 되어야한 
+
+564*704
+
+--sys에서 사용자 계정(=DB) 생성
+
+create user userA1 IDENTIFIED by a1234;
+
+GRANT CONNECT,resource TO userA1; --=> 얘로 권한 을 줘야함 (CONNECT,resource에 대한 권한 부여 )
+
+select * from dict where table_name like '%ROLE%';
+
+--user04에서 확인 가능 (어떤 권한이 있는지 확인) 
+select * from USER_ROLE_PRIVS;
+
+--사용자가 role 정의
+-->userA1
+select * from scott.emp; --(객체권한, scott 계정의 emp
+
+create role def_role;
+-->scott 계정에서 권한 생성
+GRANT select on emp TO def_role;
+GRANT update on emp TO def_role;
+GRANT delete on emp TO def_role;
+-->sys (scott에서 생성한 권한은 sys에서 user04에게 권한 양도)
+grant def_role TO user04;
+--> user04 계정에서 권한이 있는지 확인 
+select * from USER_ROLE_PRIVS;
+--=> 결론
+--user04 계정에서
+set role def_role;
+select *from scott.emp;
